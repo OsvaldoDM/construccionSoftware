@@ -42,3 +42,13 @@ header h2{
 a{
     color: #e81c4f;
 }
+#table{
+    text-align: center;
+}
+.resultado{
+    display: inline-block;
+}
+
+.resultadoTXT{
+    color: green;
+}
