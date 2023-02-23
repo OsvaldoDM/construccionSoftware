@@ -1,0 +1,13 @@
+branch = rama
+Es una version alternativa de la realidad, que si es suficientemente buena puede convertirse
+    en la principal
+
+git checkout -b 
+    Crea una nueva rama y se cambia a esa
+
+Se debe de realizar para hacer commit
+    git push origin nombreBranch
+
+Para cambiar entre ramas es git checkout nombreBranch
+
+En la rama que se desea mezclar primero se hace un pull y despues ahora si un git merge nombreRama

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio 4</title>
+    <link rel="stylesheet" href="stylesLab3.css">
+</head>
+<body>
+    <article>
+        <!--Ejercicio 1-->
+        <section class="sectTable">
+            <h3>Tabla de cuadrados y cubos</h3>
+            <table id="table">
+                <thead>
+                    <th>Numero</th>
+                    <th>Cuadrado</th>
+                    <th>Cubo</th>
+                </thead>
+                <tbody id="tBody">
+                </tbody>
+            </table>
+            <button onclick="tablaNumeros()">Llenar tabla</button>
+        </section>
+        <!--Ejercicio 2-->
+        <section>
+            <h3>Tiempo en hacer una suma</h3>
+            <h3 class="resultado">Resultado: </h3>
+            <h3 class="resultado" id="resultadoTXT"></h3> <br>
+            <button onclick="pedirSuma()">Pedir suma</button>
+        </section>
+        <!--Ejercicio 3-->
+        <section>
+            <h3>Funcion contador</h3>
+            <table>
+                <thead>
+                    <th>Numeros negativos</th>
+                    <th>Cantidad de 0</th>
+                    <th>Numeros positivos</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="negativos"></td>
+                        <td id="ceros"></td>
+                        <td id="positivos"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button onclick="contador()">Contar numeros</button>
+        </section>
+        <!--Ejercicio 4-->
+        <section>
+            <h3>Obtener el promedio de cada fila de una matriz</h3>
+            <table>
+                <tbody id="tablaProm">
+                    <tr id="numeroFila"></tr>
+                    <tr id="promedioFila"></tr>
+                </tbody>
+            </table>
+            <button onclick="promedio()">Calcular promedios</button>
+        </section>
+        <!--Ejercicio 5-->
+        <section>
+            <h3>Invertir los digitos de un numero</h3>
+            <h3 id="nInvertido"></h3>
+            <button onclick="invertir()">Invertir</button>
+        </section>
+        <!--Ejercicio 6-->
+        <section>
+            <h3>Ordenamiento de numero</h3>
+            <p>Se tiene una lista de numeros aleatorios, la cual debera de ser ordenada</p>
+            <h4>Lista desordenada</h4>
+            <p id="desordenada"></p>
+            <h4>Lista ordenada</h4>
+            <p id="ordenada"></p>
+            <button onclick="generarLista()">Generar listas</button>
+        </section>
+    </article>
+    
+    <script src="scriptsLab4.js"></script>
+</body>
+</html>
