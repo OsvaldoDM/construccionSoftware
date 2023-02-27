@@ -1,0 +1,7 @@
+Node --> Entorno de ejecucion de JS que corre en el servidor
+NPM --> Node Package Manager --> gestor de paquetes de Node
+
+Trabaja con peticioines asincronas, peticiones de diferentes lados
+    Asincrona --> no necesariamente la resuelve al instante
+
+callback --> respuesta despues de que se ejecuta la operacion
