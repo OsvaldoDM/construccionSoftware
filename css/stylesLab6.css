@@ -1,0 +1,68 @@
+.top{
+    top: 70px;
+    border: 3px solid green;
+}
+.left{
+    right: 50px;
+    border: 3px solid blue;
+}
+.letras{
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size:xx-large;
+    font-style:italic;
+    font-weight: bold;
+}
+.visibility{
+    visibility: visible;
+    position: absolute;
+    left: 50%;
+    top: 100px;
+}
+
+.btn{
+    width: 6em;
+    height: 3em;
+    background: #ffb9b9;
+    border-radius: 25%;
+}
+
+.btn:hover{
+    background: #e6a5a5;
+    cursor: pointer;
+}
+
+
+h2{
+    display: inline-block;
+}
+th{
+    color:#fff;
+    padding: 1em;
+}
+#valorVik, #valorBir, #valorBor{
+    display: inline-block;
+}
+button{
+    width: 2em;
+    height: 2em;
+    border-radius: 25%;
+    margin: 0 0.5em;
+    color: white;
+}
+button:hover{
+    background: #333333;
+}
+
+img{
+    border-radius: 10%;
+    width: 80%;
+    margin: 1em;
+}
+
+#alerta{
+    position: absolute;
+    right: 12%;
+    bottom: 15%;
+    opacity: 80%;
+    visibility: hidden;
+}

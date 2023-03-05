@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio 6</title>
+    <link rel="stylesheet" href="css/stylesLab6.css">
+</head>
+<body>
+    <!--Atibutos CSS-->
+    <section>
+        <div class="top">TOP</div>
+        <div class="left">RIGHT</div>
+        <div class="containerLetras">
+            <p class="letras">LABORATORIO 6 - Programación orientada a eventos</p>
+        </div>
+        <div class="visibility" id="objeto">VISIBILITY</div>
+
+        <div>
+            <button class="btn" onclick="ocultar()">VISIBILITY</button>
+            <button class="btn" onclick="moverTop()">TOP</button>
+            <button class="btn" onclick="left()">LEFT</button>
+        </div>
+    </section>
+
+    <section>
+        <h1>Enlaces consultados</h1>
+        <ul>                        
+            <li><a href="https://tailwindcss.com/docs/installation/play-cdn">https://tailwindcss.com/docs/installation/play-cdn</a></li>
+            <li><a href="https://tailwindcss.com/docs/customizing-colors">https://tailwindcss.com/docs/customizing-colors</a></li>
+            <li><a href="https://flowbite.com/docs/components/navbar/">https://flowbite.com/docs/components/navbar/</a></li>
+            <li><a href="https://uniwebsidad.com/libros/javascript/capitulo-7/validacion#:~:text=Antes%20de%20enviar%20un%20formulario,esperar%20la%20respuesta%20del%20servidor.">https://uniwebsidad.com/libros/javascript/capitulo-7/validacion#:~:text=Antes%20de%20enviar%20un%20formulario,esperar%20la%20respuesta%20del%20servidor.</a></li>
+            <li><a href="https://developer.mozilla.org/es/docs/Learn/Forms/Form_validation">https://developer.mozilla.org/es/docs/Learn/Forms/Form_validation</a></li>
+
+        </ul>
+    </section>
+
+    <section>
+        <h1>Preguntas a responder</h1>
+        <div>
+            <h3>¿Por qué es una buena práctica usar JavaScript para checar que sean válidos los inputs de las formas antes de enviar los datos al servidor?</h3>
+            <p>Para asegurarse que los datos que se ingresaron son correctos en cuanto al contenido que sea conforme al formate que se pide, que cumpla con los
+                requisitos y tambien evitar que ingresen datos no validos que hagan que el servidor tenga una falla
+            </p>
+        </div>
+
+        <div>
+            <h3>¿Cómo puedes saltarte la seguridad de validaciones hechas con JavaScript?</h3>
+            <p>Se puede saltar la validacion entrando al codigo que se puede acceder desde la inspeccion de codigo
+                y ahi eliminar las partes de codigo que realizan la validacion. Otra forma es desactivar el JS desde la
+                configuracion del navegador.
+            </p>
+        </div>
+
+        <div>
+            <h3>Si te puedes saltar la seguridad de las validaciones de JavaScript, entonces ¿por qué la primera pregunta dice que es una buena práctica?</h3>
+            <p>Porque las validaciones si se deben de realizar pero no del lado del cliente donde tiene acceso al codigo, sino que
+                estas validaciones se deberian de realizar del lado del servidor y mandar feedback al usuario
+            </p>
+        </div>
+    </section>
+
+    <script src="js/lab6.js"></script>  
+</body>
+</html>
