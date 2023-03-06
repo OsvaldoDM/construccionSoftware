@@ -1,0 +1,97 @@
+const filesystem = require('fs');
+const http = require('http');
+
+const scripts = {};
+
+scripts.promedio = (array)=>{
+    let prom = 0;
+    for(let n of array){
+        prom += n;        
+    }
+    console.log(`El promedio es ${prom/array.length}`);
+}
+scripts.escribirArch = (strin)=>{
+    filesystem.writeFileSync('./txt/prueba.txt', strin);
+    console.log('Se ha creado el archivo!!');
+}
+scripts.abecedario = ()=>{
+    let strin = "";
+    for(let i=65;i<=90;i++) 
+        strin += String.fromCharCode(i);
+    console.log(strin);
+}
+
+scripts.correrServer=()=>{
+    const server = http.createServer( (req, res) => {    
+        console.log(req.url);
+        if(req.url === "/"){
+            res.setHeader('Content-Type', 'text/html');
+            res.write(`<!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Laboratio 5</title>
+                
+                <script src="https://cdn.tailwindcss.com"></script>
+                <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+            
+            </head>
+            <body class="bg-slate-800 flex flex-col items-center ">
+                <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Material Design - TailWind</h1>
+                <p class="text-justify mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Material Design es una guía completa para el diseño visual, interactivo y de movimiento en plataformas y dispositivos</p>
+            
+                <h3 class="text-4xl font-extrabold dark:text-white">¿Como lo uso?</h3>
+                <p class="text-justify mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Para usar material design en tus apps para Android, sigue las pautas definidas en su especificación y usa los nuevos componentes y estilos disponibles en la biblioteca de compatibilidad de material design</p>
+                <p class="text-justify mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Android ofrece las siguientes funciones para ayudarte a crear apps de material design:</p>
+                <ul class="max-w-2xl space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
+                    <li>Un tema de app de material design para diseñar todos tus widgets de IU</li>
+                    <li>Widgets para vistas complejas, como listas y tarjetas</li>
+                    <li>Nuevas API para sombras y animaciones personalizadas</li>
+                </ul>
+            
+                <h3 class="text-4xl font-extrabold dark:text-white">Tema de material y widgets</h3>
+                <img class="h-auto max-w-xs rounded-lg" src="https://developer.android.com/static/design/material/images/MaterialDark.png?hl=es-419" >
+                <p class="text-justify mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Para aprovechar las características de los materiales, como el estilo de los widgets de IU estándar, y a fin de optimizar la definición de estilo de tu app, aplica un tema basado en material a tu app.</p>
+                <p class="text-justify mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Para ofrecer a tus usuarios una experiencia familiar, usa los patrones de UX más comunes del material:</p>
+                <ul class="max-w-2xl space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
+                    <li>Promueve la acción principal de tu IU con un botón de acción flotante (FAB).</li>
+                    <li>Muestra tu marca, navegación, búsqueda y otras acciones con la barra de la app.</li>
+                    <li>Muestra y oculta la navegación de tu app con el panel lateral de navegación.</li>
+                    <li>Usa uno de los muchos otros componentes materiales para el diseño y la navegación de tu app, como barras de herramientas que se contraen, pestañas, una barra de navegación inferior y mucho más. Para verlos todos, consulta el catálogo de componentes de material design para Android</li>
+                </ul>
+            
+                <h3 class="text-4xl font-extrabold dark:text-white">Sombras y tarjetas de elevación</h3>
+                <p class="text-justify mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Además de las propiedades X e Y, las vistas en Android tienen una propiedad Z. Esta nueva propiedad representa la elevación de una vista, que determina lo siguiente:</p>
+                <ul class="max-w-2xl space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
+                    <li>El tamaño de la sombra. Las vistas con valores Z más altos proyectan sombras más grandes.</li>
+                    <li>El orden de dibujo. Las vistas con valores Z más altos aparecen encima de otras vistas.</li>
+                </ul>
+                <img class="h-auto max-w-lg rounded-lg" src="https://developer.android.com/static/images/ui/material-design/cast-shadows_2x.png?hl=es-419">
+            
+                <h3 class="text-4xl font-extrabold dark:text-white">Animaciones</h3>
+                <p class="text-justify mb-6 text-lg font-normal text-gray-500 lg<:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Las nuevas API de animación te permiten crear animaciones personalizadas para respuestas táctiles en controles de IU, cambios en el estado de las vistas y transiciones de actividades.</p>
+                <p class="text-justify mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Estas API te permiten:</p>
+                <ul class="max-w-2xl space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
+                    <li>Responder a los eventos táctiles en tus vistas con animaciones de respuestas táctiles.</li>
+                    <li>Ocultar y mostrar vistas con animaciones con efecto revelar circular.</li>
+                    <li>Alternar entre las actividades con animaciones personalizadas de transición de actividades.</li>
+                    <li>Crear animaciones más naturales con movimiento curvo.</li>
+                    <li>Animar los cambios en una o más propiedades de vista con animaciones de cambio de estado de las vistas.</li>
+                    <li>Mostrar animaciones en los elementos de diseño de listas de estado entre los cambios de estado de las vistas.</li>
+                </ul>
+            </body>
+            </html>`);
+            res.end();
+        }else{
+            res.statusCode = 404;
+            res.write("La pagina solicitada no existe");
+            res.end();
+        }
+        
+    });
+    server.listen(3000);
+};
+
+module.exports = scripts;

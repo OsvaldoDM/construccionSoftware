@@ -1,0 +1,33 @@
+{
+  "name": "app_node",
+  "version": "1.0.0",
+  "description": "Laboratorios usando node",
+  "main": "app.js",
+  "scripts": {
+    "test": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OsvaldoDM/construccionSoftware.git"
+  },
+  "keywords": [
+    "node",
+    "construccionsoftware",
+    "js",
+    "html",
+    "css",
+    "lab8"
+  ],
+  "author": "OsvaldoDM",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OsvaldoDM/construccionSoftware/issues"
+  },
+  "homepage": "https://github.com/OsvaldoDM/construccionSoftware#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "http": "^0.0.1-security",
+    "nodemon": "^2.0.21"
+  }
+}
