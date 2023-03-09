@@ -1,0 +1,12 @@
+El protocolo HTTP es un protocolo no tiene un estado
+
+porque? no seria factible mantener a nivel de protoclo mantener el estado de todas
+    las conexiones
+
+Manejando el estado del sistema a nivel de la aplicacion
+    por medio de sesiones y cookies
+
+Sesion --> Variable que en el servidor se declara como variable de sesion para algun cliente
+
+cookies --> El servidor genera una cookie y la envia en la respuesta, almacenada en el
+    navegador y esta se envia de nuevo en la siguiente peticion al sevidor
