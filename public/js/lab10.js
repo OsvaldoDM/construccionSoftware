@@ -293,8 +293,7 @@ funciones.render = ()=>{
                         return res.end();
                     }
                 });
-                
-            }   
+            }
         } else{
             res.statusCode = 404;
             res.write("La pagina solicitada no existe");            

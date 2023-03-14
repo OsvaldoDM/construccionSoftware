@@ -13,16 +13,26 @@
 // //servidor lab 10
 // scripts2.render();
 
-const { response } = require('express');
 const express = require('express');
+const bodyParser = require('body-parser');
+const path = require('path');
+
 const app = express();
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded({extended: false}));
+
+app.set('view engine', 'ejs');
+app.set('views', 'views');
+
 
 //Middlerware
-app.use((req, res, next)=>{
-    next();
-});
+// app.use((req, res, next)=>{
+//     console.log('Middlerware')
+//     next(); //Le permite a la petición avanzar hacia el siguiente middleware
+// });
 
-app.use((req, res, next)=>{
-    res.send('Hola mundo');
-});
+const rutas = require('./routes/anime.routes');
+app.use('/anime', rutas);
+
+console.log('Ya jala carnal');
 app.listen(3000);

@@ -1,0 +1,44 @@
+<%- include('partials/header.ejs') %>
+
+<form action="/anime" method="post" class="flex items-center flex-col">
+    <label for="opciones" class="mt-8 block mb-2 text-xl font-medium text-gray-900 dark:text-white">Selecciona tu personaje favorita: </label>
+    <fieldset id="opciones" class="flex justify-center">
+        <legend class="sr-only">person</legend>
+    
+        <div class="flex items-center mb-4 flex-col" style="margin: 1em">
+            <img class="h-auto w-36 rounded-lg" src="https://i.pinimg.com/originals/96/77/85/96778559c753ce2248471031e06a19d0.jpg" alt="image description">
+            <input id="person-option-1" type="radio" name="person" value="mai" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600" checked>
+            <label for="person-option-1" class="block ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                Mai Sakurajima
+            </label>
+        </div>
+    
+        <div class="flex items-center mb-4 flex-col" style="margin: 1em">
+            <img class="h-auto w-36 rounded-lg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRg-4uImfNlAJo-b6I2irdGbVNwhwZib-cbg&usqp=CAU" alt="image description">
+            <input id="person-option-2" type="radio" name="person" value="zero" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600">
+            <label for="person-option-2" class="block ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                Zero Two
+            </label>
+        </div>
+    
+        <div class="flex items-center mb-4 flex-col" style="margin: 1em">
+            <img class="h-auto w-36 rounded-lg" src="http://cm1.narvii.com/8547/679798b894bc15f612124ccc100a2d7e1e4edf0c_00.jpg" alt="image description">
+            <input id="person-option-3" type="radio" name="person" value="violett" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
+            <label for="person-option-3" class="block ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                Violett Evergarden
+            </label>
+        </div>
+    
+        <div class="flex items-center mb-4 flex-col" style="margin: 1em">
+            <img class="h-auto w-36 rounded-lg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3hSmPfrvKy9gDlKZtLVPNxFrNRSqK-yl5YA&usqp=CAU" alt="image description">
+            <input id="person-option-4" type="radio" name="person" value="asuna" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring:blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
+            <label for="person-option-4" class="block ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                Asuna Yuki
+            </label>
+        </div>
+    </fieldset>
+    <input type="submit" value="Aceptar" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-large rounded-lg text-xl w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+</form>
+
+
+<%- include('partials/footer.ejs') %>
