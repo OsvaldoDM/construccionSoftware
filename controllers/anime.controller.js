@@ -1,3 +1,5 @@
+const fs =  require('fs');
+
 controller = [];
 
 controller.getPrincipal = (req, res)=>{
@@ -30,8 +32,10 @@ controller.postPrincipal = (req, res)=>{
             break;
     }
 
+    fs.writeFileSync('txt/personFav.txt',`Tu personaje favorita es:${req.body.person}\nLink a la imagen: ${src}`);
+
     res.render('home',{
-        src: src || false   
+        src: src || false
     });
 }
 module.exports = controller;

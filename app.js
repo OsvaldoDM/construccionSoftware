@@ -31,8 +31,20 @@ app.set('views', 'views');
 //     next(); //Le permite a la petición avanzar hacia el siguiente middleware
 // });
 
-const rutas = require('./routes/anime.routes');
-app.use('/anime', rutas);
+const rutasAnime = require('./routes/anime.routes');
+app.use('/anime', rutasAnime);
 
-console.log('Ya jala carnal');
+const rutasDashboard = require('./routes/dashboard.routes');
+app.use('/dashboard',rutasDashboard);
+
+
+// app.use((req, res, next) => {
+//     res.status(404);
+    
+//     //Envía la respuesta al cliente
+//     res.send('Lo sentimos, esta ruta no existe');
+// });
+
+
+console.log('Is running...');
 app.listen(3000);
