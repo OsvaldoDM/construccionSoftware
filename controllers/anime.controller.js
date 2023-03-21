@@ -1,4 +1,5 @@
 const fs =  require('fs');
+const waifus = require('../models/personaje.model');
 
 controller = [];
 
@@ -8,7 +9,7 @@ controller.getPrincipal = (req, res)=>{
     });
 };
 controller.getCatalogo = (req, res)=>{
-    res.render('catalogo');
+    res.render('catalogo', {waifus: waifus.fetchAll() });
 };
 controller.getVotar = (req, res)=>{
     res.render('votar');
@@ -38,4 +39,10 @@ controller.postPrincipal = (req, res)=>{
         src: src || false
     });
 }
+
+controller.getAgregar = (req, res) =>{
+    res.render('agregar')
+};
+
+
 module.exports = controller;

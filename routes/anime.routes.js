@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('../controllers/anime.controller')
+const controller = require('../controllers/anime.controller');
 
 router.get('/',controller.getPrincipal);
-router.post('/',controller.postPrincipal)
+router.post('/',controller.postPrincipal);
 router.get('/catalogo',controller.getCatalogo);
 router.get('/votar',controller.getVotar);
+router.get('/agregar',controller.getAgregar);
 
 module.exports = router;

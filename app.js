@@ -38,12 +38,10 @@ const rutasDashboard = require('./routes/dashboard.routes');
 app.use('/dashboard',rutasDashboard);
 
 
-// app.use((req, res, next) => {
-//     res.status(404);
-    
-//     //Envía la respuesta al cliente
-//     res.send('Lo sentimos, esta ruta no existe');
-// });
+app.use((req, res, next) => {
+    res.status(404);
+    res.render('404.ejs')
+});
 
 
 console.log('Is running...');

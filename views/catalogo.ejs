@@ -1,21 +1,23 @@
 <%- include('partials/header.ejs') %>
 
+<a href="/anime/agregar" class="fixed bottom-6 right-6 bg-gray-300 p-4 rounded-lg hover:bg-gray-500">Agregar</a>
+
 <div class="w-full flex flex-wrap justify-center p-10">
 
-    <% for(i=0; i<11; i++){%>
+    <% for(i=0; i<waifus.length; i++){%>
         <div style="margin: 1em" class="inline-block max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <a href="#">
-                <img class="rounded-t-lg w-full object-cover" src="https://images7.alphacoders.com/959/959381.jpg" alt="puto" />
+                <img class="rounded-t-lg w-full object-cover" src="<%= waifus[i].link %>" alt="puto" />
             </a>
             <div class="p-5">
                 <a href="#">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Mai Sakurajima</h5>
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><%= waifus[i].nombre %></h5>
                 </a>
-                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Ella es una actriz/modelo notable y va en tercer año en la preparatoria Minegahara.</p>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><%= waifus[i].desc %></p>
             </div>
         </div>
     <%}%>
-    
+
 </div>
 
 <%- include('partials/footer.ejs') %>
