@@ -1,0 +1,15 @@
+RIA --> aplicacion enriquesida de internet
+
+Como hacerlo --> implementando AJAX
+
+AJAX --> asynchonous javascript and XML
+Conjunto de tecnologias que involucran:
+    JS --> tecnologias de ejecucion de lado del cliente
+    XML HTTP Request --> medio de transporte
+    originalmente XML --> formato de intercambio de datos
+    node --> tecnologias de ejecucion del lado del servidor
+
+
+
+En lugar de res.render
+    Sse estaria usando res.estatus().json{}

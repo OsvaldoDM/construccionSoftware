@@ -15,7 +15,13 @@
                 <img src="https://i.pinimg.com/originals/96/77/85/96778559c753ce2248471031e06a19d0.jpg" class="h-6 mr-3 sm:h-9 rounded-full" />
                 <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Anime</span>
             </a>
+            <% if(user){%>
+                <div class="inline">
+                    <p>Hola <%= user %>!!</p>
+                </div>
+            <% }%>
         </div>
+        
     </nav>
     <nav class="bg-gray-50 dark:bg-gray-700">
         <div class="max-w-screen-xl px-4 py-3 mx-auto md:px-6">
@@ -29,6 +35,9 @@
                     </li>                    
                     <li>
                         <a href="/anime/votar" class="text-gray-900 dark:text-white hover:underline">Votar</a>
+                    </li>                    
+                    <li>
+                        <a href="/anime/preguntas" class="text-gray-900 dark:text-white hover:underline">PreguntasLabs</a>
                     </li>                    
                 </ul>
             </div>

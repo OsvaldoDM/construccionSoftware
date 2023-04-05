@@ -1,21 +1,54 @@
 const fs =  require('fs');
-const waifus = require('../models/personaje.model');
+const personaje = require('../models/personaje.model');
 
 controller = [];
 
+
+controller.getLogin = (req, res)=>{
+    res.render('login')
+};
+
 controller.getPrincipal = (req, res)=>{
     res.render('home',{
-        src: false   
+        src: req.cookies.src || false,
+        user: req.session.user
     });
 };
+
 controller.getCatalogo = (req, res)=>{
-    res.render('catalogo', {waifus: waifus.fetchAll() });
+    res.render('catalogo', {waifus: personaje.fetchAll(),
+        user: req.session.user});
 };
+
 controller.getVotar = (req, res)=>{
-    res.render('votar');
+    res.render('votar',{user: req.session.user});
 };
+
+controller.getAgregar = (req, res) =>{
+    res.render('agregar',{user: req.session.user})
+};
+
+controller.getBuscar = (req, res) =>{
+    rows = personaje.find(req.params.valor);
+    if(rows!=null){
+        res.status(200).json({waifus: rows});        
+    }else{
+        console.log(error);
+        res.status(200).json({mensaje: "Internal server error"});
+    }
+};
+
+controller.getPreguntas = (req,res) =>{
+    res.render('preguntas',{user: req.session.user})
+};
+
+controller.postLogin = (req,res)=>{
+    req.session.user = req.body.user;
+    if(req.session.user!=undefined)
+        res.redirect('/anime/');
+};
+
 controller.postPrincipal = (req, res)=>{
-    console.log(req.body);
     let src = "";
 
     switch(req.body.person){
@@ -34,15 +67,19 @@ controller.postPrincipal = (req, res)=>{
     }
 
     fs.writeFileSync('txt/personFav.txt',`Tu personaje favorita es:${req.body.person}\nLink a la imagen: ${src}`);
-
-    res.render('home',{
-        src: src || false
-    });
+    res.cookie('src',src);
+    res.redirect('/anime');
 }
 
-controller.getAgregar = (req, res) =>{
-    res.render('agregar')
-};
+controller.postAgregar = (req, res) =>{
+    const waifu = new personaje({
+        link: req.body.link,
+        nombre: req.body.nombre,
+        desc: req.body.desc
+    });
+    waifu.save();    
 
+    res.redirect('/anime/catalogo');
+}
 
 module.exports = controller;

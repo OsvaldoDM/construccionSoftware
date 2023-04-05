@@ -22,10 +22,10 @@ const personajes = [
 ];
 
 module.exports = class personaje {
-    personaje(link, nombre, desc){
-        this.link = link;1
-        this.nombre = nombre;
-        this.desc = desc;
+    constructor(data){
+        this.link = data.link || 'https://i0.wp.com/imgs.hipertextual.com/wp-content/uploads/2022/12/Princesas-Disney-scaled.jpg?fit=2560%2C1440&quality=50&strip=all&ssl=1';
+        this.nombre = data.nombre || 'lorem ipsum';
+        this.desc = data.desc || 'lorem ipsum dollor ammet';
     };
 
     save(){
@@ -33,6 +33,10 @@ module.exports = class personaje {
     }
 
     static fetchAll(){
+        return personajes;
+    }
+
+    static find(valor){
         return personajes;
     }
 };
