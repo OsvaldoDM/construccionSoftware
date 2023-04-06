@@ -1,5 +1,7 @@
 const fs =  require('fs');
+const bcrypt = require('bcryptjs');
 const personaje = require('../models/personaje.model');
+const usuario = require('../models/usuario.model');
 
 controller = [];
 
@@ -54,9 +56,8 @@ controller.getEdit = (req, res) =>{
         res.render('editar',{user: req.session.user,
             data: info[0]});
     })
-    .catch(err=>console.log(err));
-    
-}
+    .catch(err=>console.log(err));  
+};
 
 controller.getDelete = (req, res) =>{
     personaje.delete(req.params.id)
@@ -64,12 +65,39 @@ controller.getDelete = (req, res) =>{
         res.redirect('/anime/catalogo')
     })
     .catch(err=>console.log(err));
+};
+
+controller.getLogout = (req, res, next) =>{
+    req.session.destroy();
+    res.redirect('/anime/login');
+};
+
+controller.getRegistrar = (req, res, next) =>{
+    res.render('registrar');
 }
 
 controller.postLogin = (req,res)=>{
-    req.session.user = req.body.user;
-    if(req.session.user!=undefined)
-        res.redirect('/anime/');
+    usuario.fetchOne(req.body.user)
+    .then(([rows,fieldData])=>{
+        if(rows.length == 1){
+            bcrypt.compare(req.body.password, rows[0].contrasena)
+            .then((doMatch)=>{
+                if(doMatch){
+                    req.session.user = req.body.user;
+                    req.session.isLoggedIn = true;
+                    if(req.session.user!=undefined)
+                        res.redirect('/anime/');
+                }else{
+                    res.redirect('/anime/login');
+                }
+            })  
+            .catch(err=>console.log(err));          
+        }
+        else{
+            res.redirect('/anime/login');
+        }
+    })
+    .catch(err=>console.log(err));
 };
 
 controller.postPrincipal = (req, res)=>{
@@ -119,4 +147,16 @@ controller.postEdit = (req, res) =>{
     .catch(err=>console.log(err));
 }
 
+controller.postRegistrar = (req, res) =>{
+    const persona = new usuario({
+        nombre:req.body.nombre,
+        nombreUsuario:req.body.nombreUsuario,
+        contrasena:req.body.contrasena
+    });
+    persona.registrar()
+    .then(([rows,fieldData])=>{
+        res.redirect('/anime/login');
+    })
+    .catch(err=>console.log(err));
+}
 module.exports = controller;

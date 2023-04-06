@@ -18,6 +18,8 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const session = require('express-session')
+const csrf = require('csurf');
+const csrfProtection = csrf();
 
 const app = express();
 app.use(express.static(path.join(__dirname, 'public')));
@@ -42,6 +44,11 @@ app.use(session({
     resave: false, //La sesión no se guardará en cada petición, sino sólo se guardará si algo cambió 
     saveUninitialized: false, //Asegura que no se guarde una sesión para una petición que no lo necesita
 }));
+app.use(csrfProtection);
+app.use((req, res, next) => {
+    res.locals.csrfToken = req.csrfToken();
+    next();
+});
 
 const rutasAnime = require('./routes/anime.routes');
 app.use('/anime', rutasAnime);

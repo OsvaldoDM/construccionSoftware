@@ -1,20 +1,25 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/anime.controller');
+const auth = require('../util/isAuth');
 
 router.get('/login',controller.getLogin);
-router.get('/',controller.getPrincipal);
-router.get('/catalogo',controller.getCatalogo);
-router.get('/votar',controller.getVotar);
-router.get('/agregar',controller.getAgregar);
-router.get('/catalogo/buscar/:valor', controller.getBuscar);
-router.get('/preguntas',controller.getPreguntas);
-router.get('/edit/:id',controller.getEdit);
-router.get('/delete/:id',controller.getDelete);
+router.get('/',auth,controller.getPrincipal);
+router.get('/catalogo',auth,controller.getCatalogo);
+router.get('/votar',auth,controller.getVotar);
+router.get('/agregar',auth,controller.getAgregar);
+router.get('/catalogo/buscar/:valor',auth,controller.getBuscar);
+router.get('/preguntas',auth,controller.getPreguntas);
+router.get('/edit/:id',auth,controller.getEdit);
+router.get('/delete/:id',auth,controller.getDelete);
+router.get('/logout',auth,controller.getLogout);
+router.get('/registrar',controller.getRegistrar);
 
 router.post('/login',controller.postLogin);
-router.post('/',controller.postPrincipal);
-router.post('/agregar',controller.postAgregar);
-router.post('/edit',controller.postEdit);
+router.post('/',auth,controller.postPrincipal);
+router.post('/agregar',auth,controller.postAgregar);
+router.post('/edit',auth,controller.postEdit);
+router.post('/registrar',controller.postRegistrar);
+
 
 module.exports = router;

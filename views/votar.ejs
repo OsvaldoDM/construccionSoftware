@@ -1,6 +1,7 @@
 <%- include('partials/header.ejs',{user:user || false}) %>
 
 <form action="/anime" method="post" class="flex items-center flex-col">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
     <label for="opciones" class="mt-8 block mb-2 text-xl font-medium text-gray-900 dark:text-white">Vota por tu preferida: </label>
     <fieldset id="opciones" class="flex justify-center">
         <legend class="sr-only">person</legend>

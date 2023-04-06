@@ -6,9 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anime</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <link rel="shortcut icon" href="https://i.pinimg.com/originals/96/77/85/96778559c753ce2248471031e06a19d0.jpg" type="image/x-icon">
 </head>
 
-<body>
+<body class="dark:bg-gray-600">
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4 md:px-6 py-2.5">
             <a class="flex items-center" href="/anime">
@@ -17,9 +20,13 @@
             </a>
             <% if(user){%>
                 <div class="inline">
-                    <p>Hola <%= user %>!!</p>
+                    <p class="inline dark:text-white">Hola <%= user %>!!</p>
+                    <div class="inline-block rounded-lg bg-red-400 text-mg text-white whitespace-nowrap p-2 ml-4 font-bold hover:bg-red-500">
+                        <a href="/anime/logout">LOG OUT</a>
+                    </div>
                 </div>
             <% }%>
+            
         </div>
         
     </nav>
