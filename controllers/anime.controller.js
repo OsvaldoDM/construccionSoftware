@@ -16,8 +16,12 @@ controller.getPrincipal = (req, res)=>{
 };
 
 controller.getCatalogo = (req, res)=>{
-    res.render('catalogo', {waifus: personaje.fetchAll(),
-        user: req.session.user});
+    personaje.fetchAll()
+    .then(([rows, fieldData]) =>{        
+        res.render('catalogo', {waifus: rows,
+            user: req.session.user});
+    })
+    .catch(err => console.log(err));
 };
 
 controller.getVotar = (req, res)=>{
@@ -41,6 +45,26 @@ controller.getBuscar = (req, res) =>{
 controller.getPreguntas = (req,res) =>{
     res.render('preguntas',{user: req.session.user})
 };
+
+controller.getEdit = (req, res) =>{
+    res.cookie('id',req.params.id);
+    personaje.fetchOne(req.params.id)
+    .then(([rows,fieldData])=>{
+        info = rows;
+        res.render('editar',{user: req.session.user,
+            data: info[0]});
+    })
+    .catch(err=>console.log(err));
+    
+}
+
+controller.getDelete = (req, res) =>{
+    personaje.delete(req.params.id)
+    .then(([rows,fieldData])=>{        
+        res.redirect('/anime/catalogo')
+    })
+    .catch(err=>console.log(err));
+}
 
 controller.postLogin = (req,res)=>{
     req.session.user = req.body.user;
@@ -73,13 +97,26 @@ controller.postPrincipal = (req, res)=>{
 
 controller.postAgregar = (req, res) =>{
     const waifu = new personaje({
-        link: req.body.link,
+        img: req.body.img,
         nombre: req.body.nombre,
-        desc: req.body.desc
+        descripcion: req.body.descripcion
     });
     waifu.save();    
 
     res.redirect('/anime/catalogo');
+}
+
+controller.postEdit = (req, res) =>{
+    const waifu = new personaje({
+        img: req.body.img,
+        nombre: req.body.nombre,
+        descripcion: req.body.descripcion
+    });
+    waifu.edit(req.cookies.id)
+    .then(([rows,fieldData])=>{
+        res.redirect('/anime/catalogo')
+    })
+    .catch(err=>console.log(err));
 }
 
 module.exports = controller;
