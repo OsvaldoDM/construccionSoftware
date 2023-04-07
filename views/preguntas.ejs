@@ -28,5 +28,32 @@
             base de datos y mantener actualizado el software
         </p>
     </li>
+    <li class="px-8 py-4 dark:text-gray-200">
+        <p class="font-bold my-4">¿Qué otras formas de autentificación existen?</p>
+        <p>Autenticacion basada en certificados que esta se basa en un certificado virtual
+            que se emite, el cual se puede almacenar en una USB o en el navegador web.
+            Autenticacion biometrica, con este tipo se usan caracteristicas fisicas del usuario
+            como huellas dactilares, reconocimiento facial o de voz
+        </p>
+    </li>
+    <li class="px-8 py-4 dark:text-gray-200">
+        <p class="font-bold my-4">¿En qué consiste el control de acceso basado en roles?</p>
+        <p>Consiste en que cada usuario debera estar asignado a diferentes roles ya sea uno
+            o varios segun el modelo del sistema y asi mismo cada rol tendra diferentes
+            permisoso privilegios con los que podra hacer diferentes acciones en el sistema
+        </p>
+    </li>
+    <li class="px-8 py-4 dark:text-gray-200">
+        <p class="font-bold my-4">Investiguen y describan 2 sistemas, uno que aplique RBAC y uno que no. Realicen un análisis de las ventajas y desventajas de cada uno con respecto al control de acceso.</p>
+        <p>Tomando de referencia un sistema de inventarios, uno donde se aplica RBAC y otro donde no.
+            En el primero ya que no hay permisos se entenderia que cualquier usuario podra hacer cambio en el sistema
+            por lo tanto podra cambiar informacion que no deberia cambiar por ejemplo un usuario podria registrar que se tienen
+            menos unidades en almacen o cambiar datos de entregas que se han hecho ya que aunque se podria decir que en la
+            empresa existen diferentes roles en el sistema no serviria ya que todos pueden hacer lo que sea.
+            Por otro lado en el que si se aplica los usuarios podran tener diferentes funciones, por ejemplo algunos
+            unicamente podran consultar el inventario y algunos otros para registrar o editar informacion con lo que se 
+            tendra una mayor seguridad en la informacion.
+        </p>
+    </li>
 </ul>
 <%- include('partials/footer.ejs') %>

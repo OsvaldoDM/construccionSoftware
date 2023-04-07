@@ -34,4 +34,12 @@ module.exports = class usuario{
     static fetchOne(user){
         return db.execute(`SELECT * FROM USUARIO WHERE nombreUsuario = ?`,[user]);
     }
+
+    static fetchPrivilegios(user){
+        return db.execute(`SELECT P.nombre
+        FROM USUARIO  U JOIN USUARIO_ROL UR ON U.idUsuario = UR.idUsuario
+        JOIN ACCIONES A ON UR.idRol = A.idRol 
+        JOIN PRIVILEGIO P ON A.idPrivilegio = P.idPrivilegio
+        WHERE U.idUsuario = ?`,[user]);
+    }
 }

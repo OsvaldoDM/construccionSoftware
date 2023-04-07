@@ -21,7 +21,8 @@ controller.getCatalogo = (req, res)=>{
     personaje.fetchAll()
     .then(([rows, fieldData]) =>{        
         res.render('catalogo', {waifus: rows,
-            user: req.session.user});
+            user: req.session.user || '',
+            privilegios: req.session.privilegios || []});
     })
     .catch(err => console.log(err));
 };
@@ -85,8 +86,18 @@ controller.postLogin = (req,res)=>{
                 if(doMatch){
                     req.session.user = req.body.user;
                     req.session.isLoggedIn = true;
-                    if(req.session.user!=undefined)
-                        res.redirect('/anime/');
+                    usuario.fetchPrivilegios(rows[0].idUsuario)
+                    .then(([consultaPri, fieldData])=>{
+                        const privilegios = [];
+                        for(let privilegio of consultaPri){
+                            privilegios.push(privilegio.nombre);
+                        }
+                        req.session.privilegios = privilegios;                        
+                        return req.session.save(err => {
+                            res.redirect('/anime/');
+                        });
+                    })
+                    .catch(err=>console.log(err));
                 }else{
                     res.redirect('/anime/login');
                 }
