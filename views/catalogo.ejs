@@ -1,57 +1,58 @@
 <%- include('partials/header.ejs',{user:user || false}) %>
 
-<div class="w-full p-4">
-    <form class="flex items-center m-4">
-        <input type="hidden" name="_csrf" value="<%= csrfToken %>" >  
-        <label for="simple-search" class="sr-only">Search</label>
+<div class="w-full p-4">  
         <div class="relative w-full">
             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
             </div>
-            <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search" required>
+            <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Buscar..." required>
         </div>
-    </form>
 </div>
 
 <% if(privilegios.indexOf('agregarPersonajes') >= 0){%>
     <a href="/anime/agregar" class="fixed bottom-6 right-6 bg-gray-300 p-4 rounded-lg hover:bg-gray-500">Agregar</a>
 <% }%>
 
-<div class="w-full flex flex-wrap justify-center">
-    <% for(i=0; i<waifus.length; i++){%>
-        <div style="margin: 1em; min-width: 10em; max-width: 17em;" class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">                        
-            <img class="rounded-t-lg w-full h-[40vh] object-cover" src="<%= waifus[i].img %>" alt="Waifu" />            
-            <div class="p-5">                
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><%= waifus[i].nombre %></h5>                
-                <p class="inline-block font-normal text-gray-700 dark:text-gray-400"><%= waifus[i].descripcion %></p>
-            </div>
-            <% if(privilegios.indexOf('editarPersonajes') >= 0){%>
-                <div class="flex justify-end px-4">
-                    <button id="dropdownButton" data-dropdown-toggle="dropdown<%= waifus[i].idPersonaje %>" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
-                        <span class="sr-only">Open dropdown</span>
-                        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path></svg>
-                    </button>
-                    <!-- Dropdown menu -->
-                    <div id="dropdown<%= waifus[i].idPersonaje %>" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                        <ul class="py-2" aria-labelledby="dropdownButton">
-                        <li>
-                            <a href="/anime/edit/<%= waifus[i].idPersonaje %>" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
-                        </li>
-                        <li >
-                            <a href="/anime/delete/<%= waifus[i].idPersonaje %>" class="rounded-lg block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:bg-red-400 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
-                        </li>
-                        </ul>
-                    </div>
+<div class="w-full flex flex-wrap justify-center" id="resultados">
+    <%if(waifus.length > 0){ %>
+        <% for(i=0; i<waifus.length; i++){%>
+            <div style="margin: 1em; min-width: 10em; max-width: 17em;" class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">                        
+                <img class="rounded-t-lg w-full h-[40vh] object-cover" src="<%= waifus[i].img %>" alt="Waifu" />            
+                <div class="p-5">                
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><%= waifus[i].nombre %></h5>                
+                    <p class="inline-block font-normal text-gray-700 dark:text-gray-400"><%= waifus[i].descripcion %></p>
                 </div>
-            <% }%>
-        </div>
-    <%}%>
+                <% if(privilegios.indexOf('editarPersonajes') >= 0){%>
+                    <div class="flex justify-end px-4">
+                        <button id="dropdownButton" data-dropdown-toggle="dropdown<%= waifus[i].idPersonaje %>" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
+                            <span class="sr-only">Open dropdown</span>
+                            <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path></svg>
+                        </button>
+                        <!-- Dropdown menu -->
+                        <div id="dropdown<%= waifus[i].idPersonaje %>" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                            <ul class="py-2" aria-labelledby="dropdownButton">
+                            <li>
+                                <a href="/anime/edit/<%= waifus[i].idPersonaje %>" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Edit</a>
+                            </li>
+                            <li >
+                                <a href="/anime/delete/<%= waifus[i].idPersonaje %>" class="rounded-lg block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:bg-red-400 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+                            </li>
+                            </ul>
+                        </div>
+                    </div>
+                <% }%>
+            </div>
+        <%}%>
+    <%}else { %>
+        <h1>No hay personajes registradas</h1> 
+    <% } %> 
 </div>
 
 <script>
     document.getElementById("simple-search").onkeyup = ()=>{
         //función que manda la petición asíncrona
         const valor_busqueda = document.getElementById("simple-search").value;
+        
         fetch('/anime/catalogo/buscar/'+valor_busqueda, {
             method: 'GET',
             headers: {
@@ -60,7 +61,32 @@
         }).then(result => {
             return result.json(); //Regresa otra promesa
         }).then(data => {
-            console.log("respuesta recibida");
+            let respuesta = "";
+            if (data.waifus.length > 0) {                                 
+                for (let person of data.waifus) { 
+                    respuesta += `<div style="margin: 1em; min-width: 10em; max-width: 17em;" class="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">                        
+                                    <img class="rounded-t-lg w-full h-[40vh] object-cover" src="`
+                    respuesta +=person.img;
+                    respuesta +=`" alt="Waifu" />            
+                                    <div class="p-5">                
+                                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">`;
+                    
+                    respuesta+= person.nombre;
+
+                    respuesta+= `       </h5>                
+                                        <p class="inline-block font-normal text-gray-700 dark:text-gray-400">`;
+                    
+                    respuesta+= person.descripcion;
+
+                    respuesta+= `</p>
+                            </div>
+                        </div>`
+                }             
+            } else { 
+                respuesta += '<h1>No hay perros registrados</h1>';
+            }   
+
+            document.getElementById("resultados").innerHTML = respuesta;
         }).catch(err => {
             console.log(err);
         });

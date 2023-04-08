@@ -35,16 +35,6 @@ controller.getAgregar = (req, res) =>{
     res.render('agregar',{user: req.session.user})
 };
 
-controller.getBuscar = (req, res) =>{
-    rows = personaje.find(req.params.valor);
-    if(rows!=null){
-        res.status(200).json({waifus: rows});        
-    }else{
-        console.log(error);
-        res.status(200).json({mensaje: "Internal server error"});
-    }
-};
-
 controller.getPreguntas = (req,res) =>{
     res.render('preguntas',{user: req.session.user})
 };
@@ -84,6 +74,29 @@ controller.getUpload = (req, res)=>{
             user: req.session.user || ''});
     })
     .catch(err => console.log(err));
+};
+
+controller.getBuscar = (req, res) =>{
+    let valor = req.params.valor;
+    if(valor != ''){
+        personaje.find(valor)
+        .then(([rows,fieldData])=>{
+            res.status(200).json({waifus: rows});
+        })
+        .catch(err=>{
+            console.log(err);
+            res.status(200).json({mensaje: "Internal server error"});
+        });
+    }else{
+        personaje.fetchAll()
+        .then(([rows,fieldData])=>{
+            res.status(200).json({waifus: rows});
+        })
+        .catch(err=>{
+            console.log(err);
+            res.status(200).json({mensaje: "Internal server error"});
+        });
+    }
 };
 
 //Controladores para metodos post

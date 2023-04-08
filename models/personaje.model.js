@@ -56,6 +56,9 @@ module.exports = class personaje {
         return db.execute(`SELECT * FROM PERSONAJE WHERE idPersonaje = ?`,[id])
     }
     static find(valor){
-        return personajes;
+        return db.execute(
+            `SELECT * FROM PERSONAJE WHERE nombre LIKE ? or descripcion LIKE ?`,
+            ['%'+valor+'%','%'+valor+'%']
+        );
     }
 };
