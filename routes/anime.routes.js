@@ -14,12 +14,14 @@ router.get('/edit/:id',auth,controller.getEdit);
 router.get('/delete/:id',auth,controller.getDelete);
 router.get('/logout',auth,controller.getLogout);
 router.get('/registrar',controller.getRegistrar);
+router.get('/upload',auth,controller.getUpload);
 
 router.post('/login',controller.postLogin);
 router.post('/',auth,controller.postPrincipal);
 router.post('/agregar',auth,controller.postAgregar);
 router.post('/edit',auth,controller.postEdit);
 router.post('/registrar',controller.postRegistrar);
+router.post('/upload',auth,controller.postUpload);
 
 
 module.exports = router;

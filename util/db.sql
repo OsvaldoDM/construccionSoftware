@@ -51,6 +51,12 @@ CREATE TABLE USUARIO_ROL(
     FOREIGN KEY (idUsuario) REFERENCES USUARIO(idUsuario)
 );
 
+CREATE TABLE UPLOADS(
+    idUpload INT AUTO_INCREMENT,
+    ruta VARCHAR(200),
+    PRIMARY KEY(idUpload)
+);
+
 INSERT INTO `PERSONAJE` (`idPersonaje`, `nombre`, `img`, `descripcion`) VALUES
 (1, 'Mai Sakurajima', 'https://i.pinimg.com/originals/96/77/85/96778559c753ce2248471031e06a19d0.jpg', 'Ella es una actriz/modelo notable y va en tercer año en la preparatoria Minegahara.'),
 (2, 'Zero Two', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRg-4uImfNlAJo-b6I2irdGbVNwhwZib-cbg&usqp=CAU', 'Ella es un híbrido humano-klaxo sapien y miembro de la élite de pilotos de FRANXX.'),

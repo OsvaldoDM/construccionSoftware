@@ -2,9 +2,9 @@ const fs =  require('fs');
 const bcrypt = require('bcryptjs');
 const personaje = require('../models/personaje.model');
 const usuario = require('../models/usuario.model');
+const imagenes = require('../models/uploads.model');
 
 controller = [];
-
 
 controller.getLogin = (req, res)=>{
     res.render('login')
@@ -77,6 +77,16 @@ controller.getRegistrar = (req, res, next) =>{
     res.render('registrar');
 }
 
+controller.getUpload = (req, res)=>{
+    imagenes.fetchAll()
+    .then(([rows, fieldData]) =>{        
+        res.render('uploads', {imgs: rows,
+            user: req.session.user || ''});
+    })
+    .catch(err => console.log(err));
+};
+
+//Controladores para metodos post
 controller.postLogin = (req,res)=>{
     usuario.fetchOne(req.body.user)
     .then(([rows,fieldData])=>{
@@ -169,5 +179,11 @@ controller.postRegistrar = (req, res) =>{
         res.redirect('/anime/login');
     })
     .catch(err=>console.log(err));
+}
+
+controller.postUpload = (req, res) =>{
+    const imagen = new imagenes('/uploads/'+req.file.filename);
+    imagen.registrar();
+    res.redirect('/anime/upload')
 }
 module.exports = controller;
