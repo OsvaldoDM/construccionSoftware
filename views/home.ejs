@@ -61,6 +61,16 @@
     <% } %>
 </div>
 
-
+<div class="w-full p-16" id="resultados">
+    <h2 class="mb-2 text-3xl tracking-tight font-bold text-gray-900 dark:text-white">Quotes: </h2>
+    <% if(fetchdata) { %>
+        <% for(i=0; i<fetchdata.length; i++){%>            
+                <div class="">                
+                    <p class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white"><%= fetchdata[i].character %></p>                                    
+                    <p class="mb-2 text-mg tracking-tight text-gray-900 dark:text-white"><%= fetchdata[i].quote %></p>                                    
+                </div>                            
+        <% } %>
+    <% } %>
+</div>
 
 <%- include('partials/footer.ejs') %>

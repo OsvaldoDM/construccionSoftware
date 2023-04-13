@@ -11,10 +11,19 @@ controller.getLogin = (req, res)=>{
 };
 
 controller.getPrincipal = (req, res)=>{
-    res.render('home',{
-        src: req.cookies.src || false,
-        user: req.session.user
-    });
+    const data = []
+    fetch("https://animechan.vercel.app/api/quotes")
+        .then((response) => response.json())
+        .then((quote) =>{
+            for(let i=0; i<5; i++){
+                data.push(quote[i]);
+            }            
+            res.render('home',{
+                src: req.cookies.src || false,
+                fetchdata: data || false,
+                user: req.session.user
+            });
+        })
 };
 
 controller.getCatalogo = (req, res)=>{
