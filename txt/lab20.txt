@@ -1,0 +1,83 @@
+SELECT m.clave, m.descripcion
+FROM materiales m JOIN entregan e ON m.clave = e.clave
+JOIN proyectos p ON p.numero = e.numero
+WHERE p.denominacion = "México sin ti no estamos completos"
+
+SELECT m.clave, m.descripcion
+FROM materiales m JOIN entregan e ON m.clave = e.clave
+JOIN proveedores p ON p.rfc = e.rfc
+WHERE p.razonsocial = "Acme tools"
+
+SELECT P.rfc, AVG(E.cantidad)
+FROM proveedores P, entregan E
+WHERE P.rfc = E.rfc
+AND E.fecha >= '2000-01-01'
+AND E.fecha <= '2000-12-31'
+GROUP BY P.rfc
+HAVING AVG(E.cantidad) > 300
+
+SELECT M.descripcion, SUM(E.cantidad) AS 'Total entregado'
+FROM entregan E JOIN materiales M ON E.clave = M.clave
+AND E.fecha >= '2000-01-01'
+AND E.fecha <= '2000-12-31'
+GROUP BY M.clave
+
+SELECT M.descripcion, M.clave, SUM(E.cantidad)
+FROM materiales M, entregan E
+WHERE M.clave = E.clave
+AND E.fecha >= '2001-01-01'
+AND E.fecha <= '2001-12-31'
+GROUP BY M.clave
+ORDER BY SUM(E.cantidad) DESC
+LIMIT 1
+
+SELECT descripcion
+FROM materiales
+WHERE descripcion LIKE '%ub%'
+
+SELECT P.denominacion, SUM(E.cantidad * M.precio) AS 'Total a pagar'
+FROM proyectos P JOIN entregan E ON P.numero = E.numero
+JOIN materiales M ON E.clave = M.clave
+GROUP BY P.denominacion
+
+DROP VIEW IF EXISTS COAHUILA;
+CREATE VIEW COAHUILA(denominacion, rfc, razonSocial)
+AS SELECT PR.denominacion, P.rfc, P.razonsocial
+FROM proveedores P, entregan E, proyectos PR
+WHERE P.rfc = E.rfc
+AND PR.numero = E.numero
+AND denominacion = 'Televisa en acción '
+DROP VIEW IF EXISTS COAHUILA;
+CREATE VIEW COAHUILA(denominacion, rfc, razonSocial)
+AS SELECT PR.denominacion, P.rfc, P.razonsocial
+FROM proveedores P, entregan E, proyectos PR
+WHERE P.rfc = E.rfc
+AND PR.numero = E.numero
+AND denominacion = 'Educando en Coahuila'
+SELECT * 
+FROM TELEVISA
+WHERE rfc NOT IN (SELECT rfc
+                 FROM COAHUILA)
+
+
+SELECT PR.denominacion, P.rfc, P.razonsocial
+FROM proveedores P, entregan E, proyectos PR
+WHERE P.rfc = E.rfc
+AND PR.numero = E.numero
+AND denominacion = 'Televisa en acción '
+AND P.rfc NOT IN (SELECT P.rfc
+                    FROM proveedores P, entregan E, proyectos PR
+                    WHERE P.rfc = E.rfc
+                    AND PR.numero = E.numero
+                    AND denominacion = 'Educando en Coahuila')
+
+
+SELECT *
+FROM materiales M NATURAL JOIN entregan E
+NATURAL JOIN proyectos P
+NATURAL JOIN proveedores PR
+WHERE denominacion = 'Televisa en acción'
+AND rfc IN (SELECT rfc
+           FROM proveedores PR NATURAL JOIN entregan E
+           NATURAL JOIN proyectos P
+           WHERE denominacion = 'Educando en Coahuila')
